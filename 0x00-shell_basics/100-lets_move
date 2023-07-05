@@ -1,3 +1,2 @@
 #!/bin/bash
-mkdir /tmp/u/
 mv src/*[A-Z]* /tmp/u/
