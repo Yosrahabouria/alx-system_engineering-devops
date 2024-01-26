@@ -7,6 +7,6 @@ i=0
 #use the until loop
 until [ "$i" -ge 10 ]
 do
-  echo "Best school"
-  ((i++))
+	echo "Best school"
+	((i++))
 done
