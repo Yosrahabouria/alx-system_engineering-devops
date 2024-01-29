@@ -5,12 +5,12 @@
 i=0
 
 #use the while loop
-while [ "$i" -le 10 ]
+while [ "$i" -lt 10 ]
 do
-  if  [[ "$i" -eq 4 ]]
+  if  [[ "$i" -eq 3 ]]
      then
              echo "bad luck"
-  elif  [[ "$i" -eq 8 ]]
+  elif  [[ "$i" -eq 7 ]]
      then
              echo "good luck"
   else
