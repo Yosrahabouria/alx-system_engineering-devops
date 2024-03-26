@@ -20,5 +20,5 @@ sudo sed -i "s/listen 80 default_server;/$new_string/" /etc/nginx/sites-enabled/
 # Tests configuration
 sudo nginx -t
 
-# restarts nginx 
+# restarts nginx
 sudo service nginx restart
