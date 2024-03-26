@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Upadates Packages
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Creates index.html 
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Performs a 301 Redirection
+string_for_replacement="server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/hedi72;"
+sudo sed -i "s/server_name _;/$string_for_replacement/" /etc/nginx/sites-enabled/default
+
+# Restarts Nginx service
+sudo service nginx restart
