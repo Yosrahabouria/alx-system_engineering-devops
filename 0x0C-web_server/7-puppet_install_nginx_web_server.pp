@@ -1,3 +1,5 @@
+# Automates project using Puppet
+
 package { 'nginx':
   ensure => installed,
 }
