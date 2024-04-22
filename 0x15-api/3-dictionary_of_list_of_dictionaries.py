@@ -14,7 +14,7 @@ if __name__ == '__main__':
         if str(item.get('userId')) not in data:
             data[str(item.get('userId'))] = []
         url2 = 'https://jsonplaceholder.typicode.com/users?id='\
-              + str(item.get('userId'))
+               + str(item.get('userId'))
         rq2 = requests.get(url2)
         rq2 = rq2.json()
         user_name = rq2[0]['username']
