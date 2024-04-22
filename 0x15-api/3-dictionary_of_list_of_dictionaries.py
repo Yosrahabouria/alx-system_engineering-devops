@@ -15,9 +15,9 @@ if __name__ == '__main__':
             data[str(item.get('userId'))] = []
         url2 = 'https://jsonplaceholder.typicode.com/users?id='\
               + str(item.get('userId'))
-        rq2 = requests.get(url)
+        rq2 = requests.get(url2)
         rq2 = rq2.json()
-        username = rq2[0]['username']
+        user_name = rq2[0]['username']
         data2 = {}
         data2['task'] = item.get('title')
         data2['completed'] = item.get('completed')
