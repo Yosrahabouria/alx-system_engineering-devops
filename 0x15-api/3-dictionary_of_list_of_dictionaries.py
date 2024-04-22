@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+"""Python script to export data in JSON """
+
+import json
+import requests
+import sys
+
+
+if __name__ == '__main__':
+    data = {}
+    url = 'https://jsonplaceholder.typicode.com/todos'
+    rq = requests.get(url)
+    for item in rq.json():
+        if str(item.get('userId')) not in data:
+            data[str(item.get('userId'))] = []
+        url2 = 'https://jsonplaceholder.typicode.com/users?id='\
+              + str(item.get('userId'))
+        rq2 = requests.get(url)
+        rq2 = rq2.json()
+        username = rq2[0]['username']
+        data2 = {}
+        data2['task'] = item.get('title')
+        data2['completed'] = item.get('completed')
+        data2['username'] = user_name
+        data[str(item.get('userId'))].append(data2)
+
+    filename = 'todo_all_employees.json'
+    with open(filename, 'w') as f:
+        json.dump(data, f)
