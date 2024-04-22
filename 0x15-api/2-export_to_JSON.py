@@ -16,8 +16,8 @@ if __name__ == '__main__':
         for item in rq2.json():
             if item.get("userId") == int(sys.argv[1]):
                 data2 = {'task': item.get('title'),
-                     'completed': item.get('completed'),
-                     'username': user_name}
+                         'completed': item.get('completed'),
+                         'username': user_name}
                 data[sys.argv[1]].append(data2)
     filename = sys.argv[1] + '.json'
     with open(filename, 'w') as f:
