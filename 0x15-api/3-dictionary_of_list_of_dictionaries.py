@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-"""Python script to export data in JSON """
-
+""" a Python script that, using a REST API, for a given employee ID,
+    returns information about his/her TODO list progress."""
 import json
 import requests
 import sys
@@ -9,15 +9,15 @@ import sys
 if __name__ == '__main__':
     data = {}
     url = 'https://jsonplaceholder.typicode.com/todos'
-    rq = requests.get(url)
+    rq = requests.get(url2)
     for item in rq.json():
         if str(item.get('userId')) not in data:
             data[str(item.get('userId'))] = []
-        url2 = 'https://jsonplaceholder.typicode.com/users?id='
-               + str(item.get('userId'))
+        url2 = 'https://jsonplaceholder.typicode.com/users?id='\
+              + str(item.get('userId'))
         rq2 = requests.get(url2)
-        rq2 = rq2.json()
-        user_name = rq2[0]['username']
+        rq2 = r.json()
+        user_name = r[0]['username']
         data2 = {}
         data2['task'] = item.get('title')
         data2['completed'] = item.get('completed')
