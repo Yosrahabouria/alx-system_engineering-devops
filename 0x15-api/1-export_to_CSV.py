@@ -18,7 +18,7 @@ if __name__ == '__main__':
             for item in rq2.json():
                 if item.get("userId") == int(sys.argv[1]):
                     line = [item.get("userId"),
-                            username,
+                            user_name,
                             str(item.get("completed")),
                             item.get('title')]
                     wr.writerow(line)
