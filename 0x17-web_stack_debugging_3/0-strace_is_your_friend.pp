@@ -1,18 +1,9 @@
-# Fixes getting permissions on wordpress site
+# Fixes a wordpress site
 
-$uploads_dir = '/var/www/html/wp-content/uploads'
+exec { 'fix-wordpress':
 
-file { $uploads_dir:
-  ensure  => directory,
-  owner   => 'www-data',
-  group   => 'www-data',
-  mode    => '0755',
-  recurse => true,
-}
+  command => 'bash -c "sed -i s/class-wp-locale.phpp/class-wp-locale.php/ \
+/var/www/html/wp-settings.php; service apache2 restart"',
+  path    => '/usr/bin:/usr/sbin:/bin'
 
-exec { 'fix-wp-uploads-permissions':
-  command => "chmod -R u=rwX,go=rX ${uploads_dir}",
-  path    => '/bin:/usr/bin',
-  onlyif  => "test -d ${uploads_dir}",
-  require => File[$uploads_dir],
 }
