@@ -1,3 +1,5 @@
+# Fixes getting permissions on wordpress site
+
 $uploads_dir = '/var/www/html/wp-content/uploads'
 
 file { $uploads_dir:
