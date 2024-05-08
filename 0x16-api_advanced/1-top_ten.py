@@ -1,33 +1,40 @@
 #!/usr/bin/python3
 
 """
-prints the titles of the first 10 hot posts listed
+Prints the titles of the first 10 hot posts listed for a given subreddit.
 """
 
-from requests import get
-
+import sys
+import requests
 
 def top_ten(subreddit):
-    """
-    prints the titles of the first
-    10 hot posts listed for a given subreddit
-    """
+    if not subreddit or not isinstance(subreddit, str):
+        print("Invalid subreddit name.")
+        return
 
-    if subreddit is None or not isinstance(subreddit, str):
-        print("None")
-
-    user_agent = {'User-agent': 'Google Chrome Version 81.0.4044.129'}
+    user_agent = {'User-Agent': 'Your User Agent'}  # Specify a valid User-Agent
+    url = f'https://www.reddit.com/r/{subreddit}/hot/.json'
     params = {'limit': 10}
-    url = 'https://www.reddit.com/r/{}/hot/.json'.format(subreddit)
-
-    response = get(url, headers=user_agent, params=params)
-    results = response.json()
 
     try:
-        my_data = results.get('data').get('children')
+        response = requests.get(url, headers=user_agent, params=params)
 
-        for i in my_data:
-            print(i.get('data').get('title'))
+        if response.status_code == 200:
+            results = response.json()
+            posts = results.get('data', {}).get('children', [])
 
-    except Exception:
-        print("None")
+            if not posts:
+                print(f"No posts found in subreddit '{subreddit}'.")
+                return
+
+            for post in posts:
+                print(post['data']['title'])
+        else:
+            print(f"Error: {response.status_code} - {response.text}")
+
+    except requests.exceptions.RequestException as e:
+        print(f"Request error: {e}")
+
+        subreddit = sys.argv[1]
+        top_ten(subreddit)
+
